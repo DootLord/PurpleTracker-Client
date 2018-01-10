@@ -49,6 +49,7 @@
 <!-- Hidden -->
 
 <div class="animated fadeInDown z-depth-3" id="overlay-login">
+  <!-- Login Panel -->
   <div class="container">
     <!-- Title -->
     <div class="row">
@@ -64,7 +65,7 @@
       </div>
     <!-- Password -->
       <div class="input-field col s8 offset-s2">
-        <input id="password" type="text">
+        <input type="password" id="password" type="text">
         <label for="password">Password</label>
       </div>
     </div>
@@ -75,6 +76,16 @@
     </div>
   </div>
 </div>
+  <!-- End of Login -->
+
+  <!-- Task Update Panel -->
+   <div id="overlay-task" class="animated fadeInDown z-depth-3 container" style="display:none">
+      <div class="input-field col s12">
+       <input id="task-title" type="text">
+      </div>
+   </div>
+  <!-- End of Task Update -->
+
 </body>
 
 <script src="node_modules/hammerjs/hammer.js"></script>
