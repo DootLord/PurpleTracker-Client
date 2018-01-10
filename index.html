@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>PurpleTracker</title>
+  <link rel="stylesheet" type="text/css" href="lib/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/animate.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="row">
+    <table class="col s9 bordered table-dark">
+      <thead>
+        <tr>
+          <th> Task </th>
+          <th> Date Set </th>
+          <th> End Date </th>
+          <th> Urgent </th>
+        </tr>
+        </thead>
+        <tbody id="table">
+        </tbody>
+    </table>
+
+    <div class="collection col s3 userlist-container">
+      <ul class="userlist" id="users">
+        <li class="collection-item">
+          Jane Doe
+        </li>
+        <li class="collection-item">
+          John Smith
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Fixed Nodes -->
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large Green">
+      <i class="large material-icons">add</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
+    </ul>
+  </div>
+
+<!-- Hidden -->
+
+<div class="animated fadeInDown z-depth-3" id="overlay-login">
+  <div class="container">
+    <!-- Title -->
+    <div class="row">
+      <h3 class="center-align">
+        Login
+      </h3>
+    </div>
+    <!-- Login -->
+    <div class="row">
+      <div class="input-field col s8 offset-s2">
+        <input id="username" type="text">
+        <label for="username">Username</label>
+      </div>
+    <!-- Password -->
+      <div class="input-field col s8 offset-s2">
+        <input id="password" type="text">
+        <label for="password">Password</label>
+      </div>
+    </div>
+    <!-- Buttons -->
+    <div class="center-align">
+      <a id="close" class="waves-effect waves-purple btn left-align" style="background-color:#f44336">Exit</a>
+      <a id="login" class="waves-effect waves-purple btn right-align" style="background-color:#4caf50  ">Login</a>
+    </div>
+  </div>
+</div>
+</body>
+
+<script src="node_modules/hammerjs/hammer.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="lib/materialize.min.js"></script>
+
+<script>
+// You can also require other files to run in this process
+require('./renderer.js');
+</script>
+
+
+</html>
