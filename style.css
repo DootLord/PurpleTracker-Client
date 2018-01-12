@@ -67,3 +67,48 @@
   bottom:100px;
   right:200px;
 }
+
+#task-desc{
+  padding-bottom: 10px;
+  border: 0 0 0 0;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-color: #dcdcdc;
+  border-radius: 5px;
+}
+
+#note-container{
+  border-style: inset;
+  border-width: 5px;
+  height:500px;
+  overflow: scroll;
+}
+
+
+#note-list li{
+  background-color: #dcdcdc;
+  margin:10px;
+  overflow: scroll;
+}
+
+.note-item h4{
+  font-size: 25px;
+  float:left;
+  margin:0 0 0 0;
+}
+
+.note-item p:nth-child(2){
+  float:right; 
+  margin: 0 0 0 0
+}
+
+.note-item  p:nth-child(3){
+  border: 0 0 0 0;
+  margin-top: 30px;
+  padding-top:15px;
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-color:#c7c7c7;
+
+}
+

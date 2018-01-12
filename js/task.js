@@ -36,7 +36,9 @@ function renderTask(id, task, start, end, urgent) {
     // Append row to table;
     table.append(row);
 
+    // Add onclick listeners for each task
     row.onclick = function(){
+        console.log("CLICK");
         var id = this.getAttribute("id");
         getTask(id);
     }
@@ -50,6 +52,7 @@ function getTask(id){
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
+                
                 var taskDetails = JSON.parse(xhr.responseText);
                 showTask(taskDetails);
             } else {
@@ -57,13 +60,16 @@ function getTask(id){
             }
         }
     }
-
     xhr.send();
 }
 
+// Renders the task infomation in a pop-up
 function showTask(taskDetails){
-    // The panel element itself
-    Materialise.toast("HEYO");
+    console.log(taskDetails);
+
+    /** RENDER DATA ON MODAL */    
+    
+    $("#task-modal").modal("open");
 
 }
 

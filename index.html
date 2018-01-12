@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="lib/animate.css">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
   <div class="row">
     <table class="col s9 bordered table-dark">
@@ -18,9 +20,9 @@
           <th> End Date </th>
           <th> Urgent </th>
         </tr>
-        </thead>
-        <tbody id="table">
-        </tbody>
+      </thead>
+      <tbody id="table">
+      </tbody>
     </table>
 
     <div class="collection col s3 userlist-container">
@@ -42,48 +44,68 @@
       <i class="large material-icons">add</i>
     </a>
     <ul>
-      <li><a class="btn-floating red"><i class="material-icons">delete</i></a></li>
+      <li>
+        <a class="btn-floating red">
+          <i class="material-icons">delete</i>
+        </a>
+      </li>
     </ul>
   </div>
 
-<!-- Hidden -->
+  <!-- Hidden -->
 
-<div class="animated fadeInDown z-depth-3" id="overlay-login">
-  <!-- Login Panel -->
-  <div class="container">
-    <!-- Title -->
-    <div class="row">
-      <h3 class="center-align">
-        Login
-      </h3>
-    </div>
-    <!-- Login -->
-    <div class="row">
-      <div class="input-field col s8 offset-s2">
-        <input id="username" type="text">
-        <label for="username">Username</label>
+  <div class="animated fadeInDown z-depth-3" id="overlay-login">
+    <!-- Login Panel -->
+    <div class="container">
+      <!-- Title -->
+      <div class="row">
+        <h3 class="center-align">
+          Login
+        </h3>
       </div>
-    <!-- Password -->
-      <div class="input-field col s8 offset-s2">
-        <input type="password" id="password" type="text">
-        <label for="password">Password</label>
+      <!-- Login -->
+      <div class="row">
+        <div class="input-field col s8 offset-s2">
+          <input id="username" type="text" value="shaun">
+          <label for="username">Username</label>
+        </div>
+        <!-- Password -->
+        <div class="input-field col s8 offset-s2">
+          <input type="password" id="password" type="text" value="shaun">
+          <label for="password">Password</label>
+        </div>
       </div>
-    </div>
-    <!-- Buttons -->
-    <div class="center-align">
-      <a id="close" class="waves-effect waves-purple btn left-align" style="background-color:#f44336">Exit</a>
-      <a id="login" class="waves-effect waves-purple btn right-align" style="background-color:#4caf50  ">Login</a>
+      <!-- Buttons -->
+      <div class="center-align">
+        <a id="close" class="waves-effect waves-purple btn left-align" style="background-color:#f44336">Exit</a>
+        <a id="login" class="waves-effect waves-purple btn right-align" style="background-color:#4caf50  ">Login</a>
+      </div>
     </div>
   </div>
-</div>
   <!-- End of Login -->
 
   <!-- Task Update Panel -->
-   <div id="overlay-task" class="animated fadeInDown z-depth-3 container" style="display:none">
-      <div class="input-field col s12">
-       <input id="task-title" type="text">
+  <div id="task-modal" class="modal">
+    <div class="modal-content container">
+      <h4 id="task-title" class="col s12">MODAL TITLE</h4>
+      <p id="task-desc" class="col s12">Play Oculus-exclusive games on the HTC Vive, scroll down for downloads and installation instructions. If you'd like
+        to make a donation you can do so on my Patreon. </p>
+      <div id="note-container" class="col s12">
+        <ul id="note-list">
+          <li class="note-item">
+            <h4 class="col s8">TEXT!</h4>
+            <p>2018/01/01</p>
+            <p >Play Oculus-exclusive games on the HTC Vive, scroll down for downloads and installation instructions. If you'd
+              like to make a donation you can do so on my Patreon.Play Oculus-exclusive games on the HTC Vive, scroll down
+              for downloads and installation instructions. If you'd like to make a donation you can do so on my Patreon.Play
+              Oculus-exclusive games on the HTC Vive, scroll down for downloads and installation instructions. If you'd like
+              to make a donation you can do so on my Patreon. </p>
+          </li>
+          <li>TEXT!</li>
+        </ul>
       </div>
-   </div>
+    </div>
+  </div>
   <!-- End of Task Update -->
 
 </body>
@@ -93,8 +115,8 @@
 <script src="lib/materialize.min.js"></script>
 
 <script>
-// You can also require other files to run in this process
-require('./renderer.js');
+  // You can also require other files to run in this process
+  require('./renderer.js');
 </script>
 
 

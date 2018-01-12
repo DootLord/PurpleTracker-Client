@@ -44,6 +44,7 @@ function startScript() {
     xhr.open("GET", "http://localhost:4200/tasks?uid=" + user.id);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
+        $('.modal').modal();
         task.renderTasks(JSON.parse(xhr.responseText)); // Called to /js/task.js
       }
     }
@@ -81,8 +82,6 @@ function startScript() {
     }
     xhr.send(JSON.stringify(login));
   }
-
-  
 
   /** On Click */
   // Login user on button press
