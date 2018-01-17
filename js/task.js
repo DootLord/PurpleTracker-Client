@@ -8,6 +8,7 @@ function renderTasks(tasks) {
     }
 }
 
+
 /** 
  * Uses data pulled from server to display tasks to user
  */
@@ -37,7 +38,7 @@ function renderTask(id, task, start, end, urgent) {
     table.append(row);
 
     // Add onclick listeners for each task
-    row.onclick = function(){
+    row.onclick = function () {
         console.log("CLICK");
         var id = this.getAttribute("id");
         getTask(id);
@@ -45,14 +46,13 @@ function renderTask(id, task, start, end, urgent) {
 }
 
 // Get latest task infomation from server
-function getTask(id){
+function getTask(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET" ,"http://localhost:4200/task?task_id=" + id);
+    xhr.open("GET", "http://localhost:4200/task?task_id=" + id);
 
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4){
-            if(xhr.status === 200){
-                
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
                 var taskDetails = JSON.parse(xhr.responseText);
                 showTask(taskDetails);
             } else {
@@ -63,14 +63,78 @@ function getTask(id){
     xhr.send();
 }
 
-// Renders the task infomation in a pop-up
-function showTask(taskDetails){
-    console.log(taskDetails);
-
-    /** RENDER DATA ON MODAL */    
-    
+// Renders the task infomation in a modal pop-up
+function showTask(taskDetails) {
+    renderTask(taskDetails.task);
+    renderNote(taskDetails.note);
     $("#task-modal").modal("open");
 
+    function renderTask(task) {
+        var title = $("#task-title")[0];
+        var date = $("#task-date")[0];
+        var text = $("#task-desc")[0];
+
+        title.innerHTML = "";
+        //date.innerHTML = "";
+        text.innerHTML = "";
+
+        title.innerText = task.title;
+        task.set_date = formatDate(task.set_date);
+        //date.innerText = task.set_date;
+        text.innerText = task.text;
+    }
+
+    function renderNote(note){
+        var noteArea = $("#note-list")[0];
+        noteArea.innerHTML = "";
+        for (var i = 0; note.length > i; i++) {
+            var noteItem = document.createElement("li");
+            var title = document.createElement("h4");
+            var date = document.createElement("p");
+            var text = document.createElement("p");
+
+            noteItem.classList.add("note-item");
+            
+            if(note[i].colour){
+                noteItem.style.backgroundColor = note[i].colour;
+            }
+        
+            title.classList.add("col", "s8");
+            title.innerText = note[i].title;
+            console.log(note[i].date);
+            note[i].date = formatDate(note[i].date);
+            date.innerText = note[i].date;
+
+            text.innerText = note[i].note;
+
+            noteItem.append(title);
+            noteItem.append(date);
+            noteItem.append(text);
+
+            noteArea.append(noteItem);
+        }
+    }
+}
+
+function formatDate(date) {
+    // Trim off any extra characters
+    date = date.substring(0,11);
+
+    // Rotate date around
+    date = date.split("-");
+    date.reverse();
+    date = date.join("-");
+
+    // Replace "-" with "/"
+    date = date.replace(/-/g, "/");
+
+    // Remove SQL Timestamp characters "T" and "Z"
+    date = date.replace(/[A-Z]/g, " ");
+
+    // Remove any spaces
+    date = date.replace(" ", "");
+
+    return date;
 }
 
 

@@ -1,5 +1,6 @@
 const remote = require("electron").remote;
 const task = require("./js/task.js");
+const userLib = require("./js/user.js");
 const storage = window.localStorage;
 const BrowserWindow = remote.BrowserWindow;
 var user;
@@ -46,6 +47,7 @@ function startScript() {
       if (xhr.readyState === 4 && xhr.status === 200) {
         $('.modal').modal();
         task.renderTasks(JSON.parse(xhr.responseText)); // Called to /js/task.js
+        userLib.startUserPopulation();
       }
     }
     xhr.send();
