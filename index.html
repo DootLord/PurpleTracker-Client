@@ -52,8 +52,10 @@
     </ul>
   </div>
 
-  <!-- Hidden -->
+  <!-- ------------------------------------------ Hidden ------------------------------------------ -->
 
+
+  <!-- Login Panel -->
   <div class="animated fadeInDown z-depth-3" id="overlay-login">
     <!-- Login Panel -->
     <div class="container">
@@ -86,22 +88,20 @@
 
   <!-- Task Update Panel -->
   <div id="task-modal" class="modal">
-    <div class="modal-content container">
-      <h4 id="task-title" class="col s12">MODAL TITLE</h4>
-      <p id="task-desc" class="col s12">Play Oculus-exclusive games on the HTC Vive, scroll down for downloads and installation instructions. If you'd like
-        to make a donation you can do so on my Patreon. </p>
+    <div class="modal-content">
+      <h4 id="task-title" class="col s12">TASK TITLE</h4>
+      <p id="task-desc" class="col s12">TASK DESCRIPTION </p>
+      <ul id="task-button-list">
+        <li>
+            <a id="note-create" class="waves-effect btn green">New</a>
+            <a id="note-delete" class="waves-effect btn red">Delete</a>
+            <a id="note-modify" class="waves-effect btn yellow" style="color:black">Modify</a>
+        </li>
+
+      </ul>
       <div id="note-container" class="col s12">
         <ul id="note-list">
-          <li class="note-item">
-            <h4 class="col s8" id="task-title">TEXT!</h4>
-            <p id="task-date">2018/01/01</p>
-            <p id="task-text">Play Oculus-exclusive games on the HTC Vive, scroll down for downloads and installation instructions. If you'd
-              like to make a donation you can do so on my Patreon.Play Oculus-exclusive games on the HTC Vive, scroll down
-              for downloads and installation instructions. If you'd like to make a donation you can do so on my Patreon.Play
-              Oculus-exclusive games on the HTC Vive, scroll down for downloads and installation instructions. If you'd like
-              to make a donation you can do so on my Patreon. </p>
-          </li>
-          <li>TEXT!</li>
+          <!-- Notes for a spesific task will appear here -->
         </ul>
       </div>
     </div>

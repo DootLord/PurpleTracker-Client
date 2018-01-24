@@ -8,32 +8,37 @@ function renderTasks(tasks) {
     }
 }
 
-
 /** 
  * Uses data pulled from server to display tasks to user
  */
 function renderTask(id, task, start, end, urgent) {
+    
     // Create reference to table
     var table = document.getElementById("table")
+
     // Create new row
     var row = document.createElement("tr");
     row.classList.add("animated", "bounceInLeft");
     row.setAttribute("id", id);
+
     // Create row elements
     var tdTask = document.createElement("td");
     var tdStart = document.createElement("td");
     var tdEnd = document.createElement("td");
     var tdUrgent = document.createElement("td");
+
     // Populate row elements
     tdTask.innerText = task;
     tdStart.innerText = start;
     tdEnd.innerText = end;
     tdUrgent.innerText = urgent;
+
     // Append row elements to row
     row.append(tdTask);
     row.append(tdStart);
     row.append(tdEnd);
     row.append(tdUrgent);
+
     // Append row to table;
     table.append(row);
 
