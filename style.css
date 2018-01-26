@@ -109,6 +109,14 @@
   border-top-width: 5px;
   border-top-style: solid;
   border-color:#c7c7c7;
+}
 
+.bottom-border{
+  padding-bottom: 10px;
+  border: 0 0 0 0;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-color: #dcdcdc;
+  border-radius: 5px;
 }
 

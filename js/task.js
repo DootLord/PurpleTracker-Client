@@ -12,9 +12,15 @@ function renderTasks(tasks) {
  * Uses data pulled from server to display tasks to user
  */
 function renderTask(id, task, start, end, urgent) {
-    
+    // Cut out date from TIMEDATE format MySQL likes to do
+    start = start.substring(0,10);
+    console.log(end);
+    if(end == null || end == undefined){end = "N/A";}
+    if(urgent == null || urgent == undefined){urgent = "BASIC";}
+    end = end.substring(0,10);
+
     // Create reference to table
-    var table = document.getElementById("table")
+    var table = document.getElementById("table");
 
     // Create new row
     var row = document.createElement("tr");
@@ -38,7 +44,6 @@ function renderTask(id, task, start, end, urgent) {
     row.append(tdStart);
     row.append(tdEnd);
     row.append(tdUrgent);
-
     // Append row to table;
     table.append(row);
 
@@ -93,6 +98,8 @@ function showTask(taskDetails) {
         var noteArea = $("#note-list")[0];
         noteArea.innerHTML = "";
         for (var i = 0; note.length > i; i++) {
+            note[i].date = note[i].date.substring(0,11);
+
             var noteItem = document.createElement("li");
             var title = document.createElement("h4");
             var date = document.createElement("p");
@@ -122,7 +129,7 @@ function showTask(taskDetails) {
 }
 
 function formatDate(date) {
-    // Trim off any extra characters
+    // Trim off any extra charactersk
     date = date.substring(0,11);
 
     // Rotate date around
