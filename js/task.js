@@ -2,6 +2,9 @@
  * Iterates through returned server object to render tasks
  * @param {JSON} tasks 
  */
+
+var serverURL;
+var currentTask;
 function renderTasks(tasks) {
     for (var i = 0; tasks.length > i; i++) {
         renderTask(tasks[i].id, tasks[i].title, tasks[i].set_date, tasks[i].complete_date, tasks[i].urgent);
@@ -13,11 +16,11 @@ function renderTasks(tasks) {
  */
 function renderTask(id, task, start, end, urgent) {
     // Cut out date from TIMEDATE format MySQL likes to do
-    start = start.substring(0,10);
+    start = start.substring(0, 10);
     console.log(end);
-    if(end == null || end == undefined){end = "N/A";}
-    if(urgent == null || urgent == undefined){urgent = "BASIC";}
-    end = end.substring(0,10);
+    if (end == null || end == undefined) { end = "N/A"; }
+    if (urgent == null || urgent == undefined) { urgent = "BASIC"; }
+    end = end.substring(0, 10);
 
     // Create reference to table
     var table = document.getElementById("table");
@@ -51,6 +54,7 @@ function renderTask(id, task, start, end, urgent) {
     row.onclick = function () {
         console.log("CLICK");
         var id = this.getAttribute("id");
+        currentTask = id;
         getTask(id);
     }
 }
@@ -58,7 +62,7 @@ function renderTask(id, task, start, end, urgent) {
 // Get latest task infomation from server
 function getTask(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:4200/task?task_id=" + id);
+    xhr.open("GET", serverURL + "/task?task_id=" + id);
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -66,7 +70,7 @@ function getTask(id) {
                 var taskDetails = JSON.parse(xhr.responseText);
                 showTask(taskDetails);
             } else {
-                Materialise.toast("Error getting task from server");
+                Materialize.toast("Error getting task from server");
             }
         }
     }
@@ -94,11 +98,11 @@ function showTask(taskDetails) {
         text.innerText = task.text;
     }
 
-    function renderNote(note){
+    function renderNote(note) {
         var noteArea = $("#note-list")[0];
         noteArea.innerHTML = "";
         for (var i = 0; note.length > i; i++) {
-            note[i].date = note[i].date.substring(0,11);
+            note[i].date = note[i].date.substring(0, 11);
 
             var noteItem = document.createElement("li");
             var title = document.createElement("h4");
@@ -106,11 +110,11 @@ function showTask(taskDetails) {
             var text = document.createElement("p");
 
             noteItem.classList.add("note-item");
-            
-            if(note[i].colour){
+
+            if (note[i].colour) {
                 noteItem.style.backgroundColor = note[i].colour;
             }
-        
+
             title.classList.add("col", "s8");
             title.innerText = note[i].title;
             console.log(note[i].date);
@@ -130,7 +134,7 @@ function showTask(taskDetails) {
 
 function formatDate(date) {
     // Trim off any extra charactersk
-    date = date.substring(0,11);
+    date = date.substring(0, 11);
 
     // Rotate date around
     date = date.split("-");
@@ -149,6 +153,22 @@ function formatDate(date) {
     return date;
 }
 
+$("#note-create").bind("click", function () {
+    $("#task-modal").modal("close");
+    $("#create-note-modal").modal("open");
+});
+
+function setServer(url) {
+    serverURL = url;
+}
+
+function getCurrentTask(){
+    return currentTask;
+}
 
 module.exports.renderTasks = renderTasks;
 module.exports.renderTask = renderTask;
+module.exports.setServer = setServer;
+module.exports.getTask = getTask;
+module.exports.getCurrentTask = getCurrentTask;
+

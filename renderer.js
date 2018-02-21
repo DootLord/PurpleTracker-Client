@@ -1,8 +1,12 @@
 const remote = require("electron").remote;
-const task = require("./js/task.js");
-const userLib = require("./js/user.js");
+const TASK = require("./js/task.js");
+const USER = require("./js/user.js");
+const NOTE = require("./js/note.js");
 const storage = window.localStorage;
 const BrowserWindow = remote.BrowserWindow;
+
+var serverURL = "http://localhost:4200";
+TASK.setServer(serverURL)
 var user;
 var tasks;
 
@@ -21,7 +25,7 @@ function checkServer() {
   }, 2500);
 
   // Ping server for response
-  xhr.open("GET", "http://localhost:4200/hello");
+  xhr.open("GET", serverURL + "/hello");
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       // If response is found, then start page script functionality
@@ -42,12 +46,13 @@ function startScript() {
    */
   function initalize() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:4200/tasks?uid=" + user.id);
+    xhr.open("GET", serverURL + "/tasks?uid=" + user.id);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
         $('.modal').modal();
-        task.renderTasks(JSON.parse(xhr.responseText)); // Called to /js/task.js
-        userLib.startUserPopulation();
+        $('select').material_select();
+        TASK.renderTasks(JSON.parse(xhr.responseText)); // Called to /js/task.js
+        USER.startUserPopulation();
       }
     }
     xhr.send();
@@ -58,7 +63,7 @@ function startScript() {
    */
   function loginUser() {
 
-    // Disable enter buttion for logging in user
+    // Disable enter button for logging in user
     document.onkeypress = undefined;
 
     var username = document.getElementById("username").value;
@@ -70,7 +75,7 @@ function startScript() {
 
     // Make request
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:4200/login");
+    xhr.open("POST", serverURL + "/login");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
 
@@ -102,10 +107,17 @@ function startScript() {
     process.exit(0); // Exit without error
   });
 
-  $("#note-create").bind("click", function(){
-    $("#task-modal").modal("close");
-    $("#create-note-modal").modal("open");
-  });
+/** Event Listeners */
+
+$("#note-create-cancel").bind("click", function(){
+
+});
+
+$("#note-create-create").bind("click", function(){
+  var currentTask = TASK.getCurrentTask();
+  NOTE.createNote(currentTask);
+  TASK.getTask(currentTask);
+});
 
   /** Keypress */
 
@@ -120,6 +132,8 @@ function startScript() {
   }
 
 }
+
+
 
 
 
